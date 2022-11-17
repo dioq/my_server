@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from flask import Flask
-
+from flask import Flask, request
 # SSL 证书
 import ssl
 
@@ -32,6 +31,17 @@ output = [
 @app.route("/get", methods=['GET'])
 def getNoParam():
     return {"products": {"Message": "get request is suucess!", "output": output}}, 200
+
+
+@app.route("/post", methods=['POST'])
+def postParamAsJson():
+    print('data:', request.data)
+    params = request.get_json()  # 获取 json 格式数据
+    print("param json:\n", params)
+    name = params["name"]  # 取其中的参数
+    item = {'name': name, 'output': output}
+    # output.append(params)
+    return item, 200
 
 
 def getSSLContext():

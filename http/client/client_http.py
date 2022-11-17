@@ -4,9 +4,9 @@ import json
 
 import requests
 
-http_get_url = "http://jobs8.cn:8081/getdata"
-http_post_url = "http://jobs8.cn:8081/postdata"
-http_post_formdata_url = "http://jobs8.cn:8081/formdata"
+http_get_url = "http://127.0.0.1:8090/get"
+http_post_url = "http://127.0.0.1:8090/post"
+http_post_formdata_url = "http://127.0.0.1:8090/postform"
 
 
 # 测试 get 请求

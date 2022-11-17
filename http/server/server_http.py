@@ -39,7 +39,12 @@ def giveHtml():
 # 建立 giveGET 路由，回传 数据 和状态码 200
 @app.route("/get", methods=['GET'])
 def getNoParam():
-    return {"products": {"Message": "Get all products..", "output": output}}, 200
+    name = request.args.get('name')
+    if name == None:
+        name = "Noname"
+    print(name)
+    item = {'name': name, 'output': output}
+    return item, 200
 
 
 @app.route("/post", methods=['POST'])
@@ -50,6 +55,14 @@ def postParamAsJson():
     name = params["name"]  # 取其中的参数
     item = {'name': name, 'output': output}
     # output.append(params)
+    return item, 200
+
+
+@app.route("/postform", methods=['POST'])
+def postParamAsForm():
+    name = request.args.get('name')
+    print(name)
+    item = {'name': name, 'output': output}
     return item, 200
 
 

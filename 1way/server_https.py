@@ -1,12 +1,29 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+# 导入Flask套件
 from flask import Flask, request
 # SSL 证书
 import ssl
 
 # 创建Flask app物件
 app = Flask(__name__)
+
+
+def getSSLContext():
+    CA_FILE = "../cert/ca/ca.cer"
+    KEY_FILE = "../cert/server/server.key"
+    CERT_FILE = "../cert/server/server.cer"
+
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.check_hostname = False
+    context.load_cert_chain(certfile=CERT_FILE, keyfile=KEY_FILE, password="zxcvbnm,.")
+    context.load_verify_locations(CA_FILE)
+    context.verify_mode = ssl.CERT_NONE  # 单向验证, 客户端可以不上传自己的证书
+    # 证书密码:zxcvbnm,.
+
+    return context
+
 
 # 创建 output 输出内容
 output = [
@@ -44,24 +61,6 @@ def postParamAsJson():
     return item, 200
 
 
-def getSSLContext():
-    CA_FILE = "../cert/ca/ca.cer"
-    KEY_FILE = "../cert/server/server.key"
-    CERT_FILE = "../cert/server/server.cer"
-
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS)
-    context.check_hostname = False
-    context.load_cert_chain(certfile=CERT_FILE, keyfile=KEY_FILE, password="zxcvbnm,.")
-    context.load_verify_locations(CA_FILE)
-    context.verify_mode = ssl.CERT_REQUIRED # 需要客户端上传证书, 服务器验证客户端证书
-    # 证书密码:zxcvbnm,.
-
-    return context
-
-
 if __name__ == "__main__":
-
     context = getSSLContext()
-
-    app.run(host="0.0.0.0", port=8092, ssl_context=context)
-    # app.run(host="0.0.0.0", port=8091, ssl_context=('cert/server/server.cer', 'cert/server/server.key'))
+    app.run(host="0.0.0.0", port=8091, debug=True, ssl_context=context)

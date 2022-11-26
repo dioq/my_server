@@ -2,11 +2,14 @@
 # -*- coding: utf-8 -*-
 
 # 导入Flask套件
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 
 # 处理上传的文件
 import os
 from werkzeug.utils import secure_filename
+
+# 下载文件
+import sent
 
 # 创建Flask app物件
 app = Flask(__name__)
@@ -73,6 +76,12 @@ def upload():
 
     if request.method == 'GET':
         return "上传文件需要用 post!", 203
+
+
+@app.route("/<filename>", methods=['GET'])
+def download(filename):
+    # as_attachment : True 下载文件, False 不下载文件
+    return send_from_directory(path="./files/", directory="./files/", filename=filename, as_attachment=True)
 
 
 if __name__ == "__main__":

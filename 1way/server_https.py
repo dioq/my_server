@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # 导入Flask套件
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 # SSL 证书
 import ssl
 
@@ -59,6 +59,12 @@ def postParamAsJson():
     item = {'name': name, 'output': output}
     # output.append(params)
     return item, 200
+
+
+@app.route("/<filename>", methods=['GET'])
+def download(filename):
+    # as_attachment : True 下载文件, False 不下载文件
+    return send_from_directory(path="/var/files/", directory="/var/files/", filename=filename, as_attachment=True)
 
 
 if __name__ == "__main__":

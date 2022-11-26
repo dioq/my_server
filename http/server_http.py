@@ -8,9 +8,6 @@ from flask import Flask, request, send_from_directory
 import os
 from werkzeug.utils import secure_filename
 
-# 下载文件
-import sent
-
 # 创建Flask app物件
 app = Flask(__name__)
 

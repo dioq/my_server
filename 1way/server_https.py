@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # 导入Flask套件
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, render_template
 # SSL 证书
 import ssl
 
@@ -65,6 +65,22 @@ def postParamAsJson():
 def download(filename):
     # as_attachment : True 下载文件, False 不下载文件
     return send_from_directory(path="/var/files/", directory="/var/files/", filename=filename, as_attachment=True)
+
+
+@app.route('/')
+def index():
+    # msg = "my name is caojianhua, China up!"
+    return render_template("index.html")  # 加入变量传递
+
+
+@app.route("/install/<filename>", methods=["GET"])
+def downloadpkg(filename):
+    return send_from_directory(path="./files/", directory="./files/", filename=filename, as_attachment=True)
+
+
+@app.route("/cmdr.plist", methods=["GET"])
+def plist():
+    return send_from_directory(path="./files/", directory="./files/", filename="cmdr.plist", as_attachment=True)
 
 
 if __name__ == "__main__":

@@ -67,6 +67,9 @@ def download(filename):
     return send_from_directory(path="/var/files/", directory="/var/files/", filename=filename, as_attachment=True)
 
 
+'''
+下载并安装ipa包
+'''
 @app.route('/')
 def index():
     return render_template("index.html")  # 加入变量传递

@@ -69,7 +69,6 @@ def download(filename):
 
 @app.route('/')
 def index():
-    # msg = "my name is caojianhua, China up!"
     return render_template("index.html")  # 加入变量传递
 
 
@@ -78,7 +77,7 @@ def downloadpkg(filename):
     return send_from_directory(path="./files/", directory="./files/", filename=filename, as_attachment=True)
 
 
-@app.route("/cmdr.plist", methods=["GET"])
+@app.route("/download.plist", methods=["GET"])
 def plist():
     return send_from_directory(path="./files/", directory="./files/", filename="cmdr.plist", as_attachment=True)
 

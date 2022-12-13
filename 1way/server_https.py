@@ -79,7 +79,7 @@ def downloadpkg(filename):
 
 @app.route("/download.plist", methods=["GET"])
 def plist():
-    return send_from_directory(path="./files/", directory="./files/", filename="cmdr.plist", as_attachment=True)
+    return send_from_directory(path="./files/", directory="./files/", filename="download.plist", as_attachment=True)
 
 
 if __name__ == "__main__":

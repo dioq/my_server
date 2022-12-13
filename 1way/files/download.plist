@@ -17,13 +17,13 @@
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>cn.jobs8.objc</string>
+				<string>com.assistant.user</string>
 				<key>bundle-version</key>
-				<string>1.1.1</string>
+				<string>1.1</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>test.ipa</string>
+				<string>V助手</string>
 			</dict>
 		</dict>
 	</array>
